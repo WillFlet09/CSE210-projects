@@ -1,13 +1,47 @@
 using System;
-using System.Text.RegularExpressions;
+using Microsoft.VisualBasic;
 
-public class Program
+class Program
 {
-    static void Main(string[] args)
+    static void RunSpinner()
     {
-        string tar = "taravarmehar";
-        string replaced = Regex.Replace(tar, @"([a-z])", "_");
-        Console.WriteLine(replaced);
-        Console.WriteLine(tar);
+        string _name = "Activity";
+        int counter = 0;
+        Console.WriteLine($"Congratulatious! you completed the {_name}");
+        while(counter < 10)
+        {
+            Console.Write($"\\");
+            Console.Write("\b");
+            Thread.Sleep(200);
+            Console.Write($"|");
+            Console.Write("\b");
+            Thread.Sleep(200);
+            Console.Write($"/");
+            Console.Write("\b");
+            Thread.Sleep(200);
+            Console.Write("-");
+            Console.Write("\b");
+            Thread.Sleep(200);
+            Console.Write("\\");
+            Console.Write("\b");
+            Thread.Sleep(200);
+            Console.Write($"|");
+            Console.Write("\b");
+            Thread.Sleep(200);
+            Console.Write("/");
+            Console.Write("\b");
+            Thread.Sleep(200);
+            Console.Write("-");
+            Console.Write("\b");
+            Thread.Sleep(200);
+            Console.Clear();
+            counter++;
+        }
     }
+
+    static void Main(String[] args)
+{
+    RunSpinner();
 }
+}
+
