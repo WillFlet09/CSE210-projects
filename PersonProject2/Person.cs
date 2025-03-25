@@ -14,7 +14,7 @@ public Person(string firstName, string lastName, int age)
     _height = 0;
 }
 
-public string DisplayPersonInfo()
+public string GetPersonInfo()
 {
     return $"information: {_firstName} {_lastName}, {_age}";
 }
@@ -27,6 +27,11 @@ public int GetHeight()
 public void SetHeight(int height)
 {
     _height = height;
+}
+
+public virtual string GetName()
+{
+    return $"{_firstName} {_lastName}";
 }
 }
 

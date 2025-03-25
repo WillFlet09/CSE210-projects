@@ -7,8 +7,13 @@ class CEO : Person{
         _business = business;
     }
 
-    public string DisplayCEOInfo()
+    public string GetCEOInfo()
     {
-        return $"Info: {DisplayPersonInfo()}, {_business}";
+        return $"{GetPersonInfo()}, {_business}";
+    }
+
+    public override string GetName()
+    {
+        return $"CEO {base.GetName()}";
     }
 }

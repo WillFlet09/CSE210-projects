@@ -8,8 +8,13 @@ class PoliceMan : Person
         _weapons = weapons;
     }
 
-    public string DisplayPoliceManInfo()
+    public string GetPoliceManInfo()
     {
-        return $"Info: {DisplayPersonInfo()}, {_weapons}";
+        return $"{GetPersonInfo()}, {_weapons}";
+    }
+
+    public override string GetName()
+    {
+        return $"{base.GetName()}, Private Eye";
     }
 }
