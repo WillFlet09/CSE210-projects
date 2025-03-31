@@ -29,7 +29,7 @@ class GoalList{
         }
         if(choice == 3)
         {
-            ChecklistGoal checklistGoal = new ChecklistGoal("", "", 0, false, "", 0, 0, 0);
+            ChecklistGoal checklistGoal = new ChecklistGoal("", "", 0, false, 0, 0, 0);
             checklistGoal.RunGoal();
             _goals.Add(checklistGoal);
         }
@@ -50,16 +50,24 @@ class GoalList{
             int points = int.Parse(parts[2]);
             bool status = bool.Parse(parts[3]);
             string goalType = parts[4];
-            if(goalType == "Simple")
+            if(goalType == "SimpleGoal")
             {
                 SimpleGoal simple = new SimpleGoal(name,description,points,status);
                 _goals.Add(simple);
             }
-            if(goalType == "Eternal")
+            if(goalType == "EternalGoal")
             {
                 int completions = int.Parse(parts[6]);
                 EternalGoal eternal = new EternalGoal(name,description,points,status,completions);
                 _goals.Add(eternal);
+            }
+            if(goalType == "ChecklistGoal")
+            {
+                int completions = int.Parse(parts[6]);
+                int max = int.Parse(parts[7]);
+                int bonus = int.Parse(parts[8]);
+                ChecklistGoal checklist = new ChecklistGoal(name,description,points,status,completions,max,bonus);
+                _goals.Add(checklist);
             }
    
         }
@@ -73,19 +81,7 @@ class GoalList{
         {
             foreach(Goal goal in _goals)
             {
-                string name = goal.GetName();
-                string description = goal.GetDescription();
-                int points = goal.GetPoints();
-                bool status = goal.GetStatus();
-                string goalType = goal.GetGoalType();
-                if(goalType == "Simple")
-                {
-                outputFile.WriteLine($"{name}#{description}#{points}#{status}#{goalType}");
-                }
-                if(goalType == "Eternal")
-                {
-                  outputFile.WriteLine($"{name}#{description}#{points}#{status}#{goalType}");  
-                }
+                goal.ToString();
             }
         }           
     }
@@ -95,16 +91,8 @@ class GoalList{
         Console.WriteLine("Your goals are:");
         foreach(Goal goal in _goals)
         {
-            bool filter = goal.GetStatus();
-            if(filter == true)
-            {
-                Console.WriteLine($"[X] {goal.GetName()} ({goal.GetDescription()}) Points: {goal.GetPoints()}");
-            }
-            else
-            {
-                Console.WriteLine($"[] {goal.GetName()} ({goal.GetDescription()}) Points: {goal.GetPoints()}");
-            }
-            }
+                Console.WriteLine(goal.ListGoal());
+        }
     }
     public void DisplayScore()
     {
@@ -120,35 +108,8 @@ class GoalList{
         Console.Write("Which Goal did you accomplish? ");
         int acomp = int.Parse(Console.ReadLine());
         acomp = acomp - 1;
-        string filter = _goals[acomp].GetGoalType();
-        if(filter == "Simple")
-        {
-            bool complete = _goals[acomp].GetStatus();
-            if(complete == false){
-                _goals[acomp].MarkComplete();
-                int addedPoints = _goals[acomp].GetPoints();
-                _totalScore = _totalScore + addedPoints;
-                Console.WriteLine($"Congratulations! You have recieved {addedPoints} points");
-            }
-            else
-            {
-                Console.WriteLine("The goal has already been acomplished");
-            }
-        }
-        if(filter == "Eternal")
-        {
-            _goals[acomp].MarkComplete();
-            int addedPoints = _goals[acomp].GetPoints();
-            _totalScore = _totalScore + addedPoints;
-            Console.WriteLine($"Congratulations! You have recieved {addedPoints} points");
-        }
-        if(filter == "Checklist")
-        {
-            int addedPoints = _goals[acomp].GetPoints();
-            _totalScore = _totalScore + addedPoints;
-             
-            
-
-        }
+        int addedPoints = _goals[acomp].RecordEvent();
+        _totalScore = _totalScore + addedPoints;
+        Console.WriteLine($"Congratulations! You have recieved {addedPoints} points");
     }
 }

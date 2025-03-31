@@ -2,7 +2,7 @@ class ChecklistGoal:Goal{
     private int _numberOfCompletions;
     private int _maxGoals;
     private int _bonusPoints;
-    public ChecklistGoal(string name, string description, int points, bool status, string goalType, int completions, int max, int bonus)
+    public ChecklistGoal(string name, string description, int points, bool status, int completions, int max, int bonus)
     :base(name,description,points,status)
     {
         _numberOfCompletions = completions;
@@ -15,19 +15,14 @@ class ChecklistGoal:Goal{
     }
     public override void RunGoal()
     {
-        Console.Write("What is the name of your goal? ");
-            string name = Console.ReadLine();
-        Console.Write("What is a short description? ");
-            string description = Console.ReadLine();
-            Console.Write("What would be the amount of points associated with this goal? ");
-            int points = int.Parse(Console.ReadLine());
-            bool status = false;
-            Console.Write("What is the max amount of completions? ");
-            int max = int.Parse(Console.ReadLine());
-            Console.Write("What is the amount of bonus points for fufilling the goal? ");
-            int bonus = int.Parse(Console.ReadLine());
-            string goalType = "CheckList";
-            ChecklistGoal checklistGoal = new ChecklistGoal(name,description,points,status,goalType,0,max,bonus);
+        SetName();
+        SetDescription();
+        SetPoints();
+        Console.Write("What is the max amount of completions? ");
+        _maxGoals = int.Parse(Console.ReadLine());
+        Console.Write("What is the amount of bonus points for fufilling the goal? ");
+        _bonusPoints = int.Parse(Console.ReadLine());
+            
     }
     // public override string GetGoalType()
     // {
@@ -35,14 +30,23 @@ class ChecklistGoal:Goal{
     // }
     public override int RecordEvent()
     {
-        throw new NotImplementedException();
+        _numberOfCompletions = _numberOfCompletions + 1;
+        if(_numberOfCompletions == _maxGoals)
+        {
+            MarkComplete();
+            return GetPoints() + _bonusPoints;
+        }
+        else{
+            return GetPoints();
+        }
+
     }
     public override string ToString()
     {
         return $"{base.ToString()}#{_numberOfCompletions}#{_maxGoals}#{_bonusPoints}";
     }
-    // public override string ListGoal()
-    // {
-    //     return base.ListGoal();
-    // }
+    public override string ListGoal()
+    {
+        return $"{base.ListGoal()} Completions: {_numberOfCompletions}/{_maxGoals}";
+    }
 }

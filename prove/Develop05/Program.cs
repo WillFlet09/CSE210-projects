@@ -12,8 +12,8 @@ class Program
             _goals.DisplayScore();
             Console.WriteLine("1. Create Goal");
             Console.WriteLine("2. Display Goals");
-            Console.WriteLine("3. Load Goals");
-            Console.WriteLine("4. Save Goals");
+            Console.WriteLine("3. Save Goals");
+            Console.WriteLine("4. Load Goals");
             Console.WriteLine("5. Record Event");
             Console.WriteLine("6. Quit");
             Console.Write("Which will you choose? ");
@@ -26,6 +26,14 @@ class Program
             if(menu == 2)
             {
                 _goals.DisplayGoals();
+            }
+            if(menu == 3)
+            {
+                _goals.SaveGoals();
+            }
+            if(menu == 4)
+            {
+                _goals.LoadGoals();
             }
             if(menu == 5)
             {

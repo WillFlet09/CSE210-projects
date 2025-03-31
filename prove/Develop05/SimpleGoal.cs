@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Net;
 
 class SimpleGoal:Goal{
@@ -21,7 +22,8 @@ class SimpleGoal:Goal{
     // }
     public override int RecordEvent()
     {
-        throw new NotImplementedException();
+        return MarkComplete();
+        
     }
 
 }

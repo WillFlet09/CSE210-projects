@@ -7,14 +7,9 @@ class EternalGoal:Goal{
     }
     public override void RunGoal()
     {
-       Console.Write("What is the name of your goal? ");
-            string name = Console.ReadLine();
-            Console.Write("What is a short description? ");
-            string description = Console.ReadLine();
-            Console.Write("What would be the amount of points associated with this goal? ");
-            int points = int.Parse(Console.ReadLine());
-            bool status = false;
-            EternalGoal eternalGoal = new EternalGoal(name,description,points,status,0);
+        SetName();
+        SetDescription();
+        SetPoints();
     }
     // public override string GetGoalType()
     // {
@@ -22,14 +17,16 @@ class EternalGoal:Goal{
     // }
     public override int RecordEvent()
     {
-        throw new NotImplementedException();
+        _numberOfCompletions = _numberOfCompletions + 1;
+        MarkComplete();
+        return GetPoints();
     }
     public override string ToString()
     {
-        return $"{base.ToString()} Completions: {_numberOfCompletions}";
+        return $"{base.ToString()}#{_numberOfCompletions}";
     }
-    // public override string ListGoal()
-    // {
-    //     return base.ListGoal();
-    // }
+    public override string ListGoal()
+    {
+        return $"{base.ListGoal()} Completions: {_numberOfCompletions}";
+    }
 }

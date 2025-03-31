@@ -53,10 +53,10 @@ public abstract class Goal{
     {
         return _status;
     }
-    public bool MarkComplete()
+    public int MarkComplete()
     {
         this._status = true;
-        return this._status;
+        return this._numberOfPoints;
     }
     public virtual string ListGoal()
     {
