@@ -15,33 +15,22 @@ class GoalList{
         Console.WriteLine("The types of Goals are: \n1. Simple Goal \n2. Eternal Goal \n3. Checklist Goal");
         Console.Write("Which Goal Would you like it to be? ");
         int choice = int.Parse(Console.ReadLine());
-        Console.Write("What is the name of your goal? ");
-            string name = Console.ReadLine();
-            Console.Write("What is a short description? ");
-            string description = Console.ReadLine();
-            Console.Write("What would be the amount of points associated with this goal? ");
-            int points = int.Parse(Console.ReadLine());
-            bool status = false;
         if(choice == 1)
         {
-            string goalType = "Simple";
-            SimpleGoal simpleGoal = new SimpleGoal(name, description, points, status, goalType);
-            _goals.Add(simpleGoal);
+            SimpleGoal simple = new SimpleGoal("", "", 0, false);
+            simple.RunGoal();
+            _goals.Add(simple);
         }
         if(choice == 2)
         {
-            string goalType = "Eternal";
-            EternalGoal eternalGoal = new EternalGoal(name,description,points,status,goalType,0);
+            EternalGoal eternalGoal = new EternalGoal("", "", 0, false, 0);
+            eternalGoal.RunGoal();
             _goals.Add(eternalGoal);
         }
         if(choice == 3)
         {
-            Console.Write("What is the max amount of completions? ");
-            int max = int.Parse(Console.ReadLine());
-            Console.Write("What is the amount of bonus points for fufilling the goal? ");
-            int bonus = int.Parse(Console.ReadLine());
-            string goalType = "CheckList";
-            ChecklistGoal checklistGoal = new ChecklistGoal(name,description,points,status,goalType,0,max,bonus);
+            ChecklistGoal checklistGoal = new ChecklistGoal("", "", 0, false, "", 0, 0, 0);
+            checklistGoal.RunGoal();
             _goals.Add(checklistGoal);
         }
     }
@@ -63,13 +52,13 @@ class GoalList{
             string goalType = parts[4];
             if(goalType == "Simple")
             {
-                SimpleGoal simple = new SimpleGoal(name,description,points,status,goalType);
+                SimpleGoal simple = new SimpleGoal(name,description,points,status);
                 _goals.Add(simple);
             }
             if(goalType == "Eternal")
             {
                 int completions = int.Parse(parts[6]);
-                EternalGoal eternal = new EternalGoal(name,description,points,status,goalType,completions);
+                EternalGoal eternal = new EternalGoal(name,description,points,status,completions);
                 _goals.Add(eternal);
             }
    
