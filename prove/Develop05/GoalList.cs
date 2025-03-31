@@ -45,11 +45,11 @@ class GoalList{
         {
             string[] parts = line.Split("#");
  
-            string name = parts[0];
-            string description = parts[1];
-            int points = int.Parse(parts[2]);
-            bool status = bool.Parse(parts[3]);
-            string goalType = parts[4];
+            string goalType = parts[0];
+            string name = parts[1];
+            string description = parts[2];
+            int points = int.Parse(parts[3]);
+            bool status = bool.Parse(parts[4]);
             if(goalType == "SimpleGoal")
             {
                 SimpleGoal simple = new SimpleGoal(name,description,points,status);
@@ -81,7 +81,7 @@ class GoalList{
         {
             foreach(Goal goal in _goals)
             {
-                goal.ToString();
+                outputFile.WriteLine(goal.ToString());
             }
         }           
     }
